@@ -1,23 +1,20 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <map>
 #include <cstdlib>
 using namespace std;
 
 int sockMerchant(int n, vector<int> ar) {
-    int temp=n;
-    int cnt =0;
+    map<int,bool> m;
     int result =0;
-    sort(ar.begin(),ar.end());
-    cout<<endl;
-    for(auto i=0; i<n;) {
-        int j = ar[i];
-        while(ar[i] == j) {
-            cnt++;
-            ++i;
+    for (auto i: ar) {
+        if (m[i] == true) {
+            result++;
+            m[i]=false;
         }
-        result += cnt/2;
-        cnt=0;
+        else {
+            m[i]=true;
+        }
     }
     return result;
 }
